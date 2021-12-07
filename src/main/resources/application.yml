@@ -1,0 +1,21 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /template
+
+spring:
+  profiles:
+    active: @profileActive@
+
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy/MM/dd HH:mm:ss
+
+mybatis:
+  type-aliases-package: com.langxy.house.pojo
+  mapper-locations: com/langxy/house/mapper/*.xml
+
+logging:
+  level:
+    com.langxy.template.data.dao: debug
+

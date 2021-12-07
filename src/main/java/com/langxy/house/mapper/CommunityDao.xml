@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.langxy.house.dao.CommunityDao">
+  <resultMap id="BaseResultMap" type="com.langxy.house.pojo.Community">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="street_id" jdbcType="BIGINT" property="streetId" />
+    <result column="community_name" jdbcType="VARCHAR" property="communityName" />
+    <result column="create_user" jdbcType="BIGINT" property="createUser" />
+    <result column="update_user" jdbcType="BIGINT" property="updateUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, street_id, community_name, create_user, update_user, create_time, update_time, 
+    is_delete
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from community_t
+    where id = #{id,jdbcType=BIGINT} and is_delete = 0
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    update community_t
+    set is_delete = 1, update_name = #{updateName}
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.langxy.house.pojo.Community" useGeneratedKeys="true">
+    insert into community_t
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="streetId != null">
+        street_id,
+      </if>
+      <if test="communityName != null">
+        community_name,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      create_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="streetId != null">
+        #{streetId,jdbcType=BIGINT},
+      </if>
+      <if test="communityName != null">
+        #{communityName,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      now(),
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.langxy.house.pojo.Community">
+    update community_t
+    <set>
+      <if test="streetId != null">
+        street_id = #{streetId,jdbcType=BIGINT},
+      </if>
+      <if test="communityName != null">
+        community_name = #{communityName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=BIGINT},
+      </if>
+      update_time = now(),
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectAll" resultType="java.util.Map">
+    select id, community_name communityName
+    from community_t
+    where is_delete = 0
+    order by create_time desc
+  </select>
+  <select id="selectByStreetId" resultType="java.util.Map">
+    select id, community_name communityName
+    from community_t
+    where street_id = #{street} and is_delete = 0
+    order by create_time desc
+  </select>
+
+</mapper>

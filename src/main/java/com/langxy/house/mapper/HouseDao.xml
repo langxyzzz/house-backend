@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.langxy.house.dao.HouseDao">
+  <resultMap id="BaseResultMap" type="com.langxy.house.pojo.House">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="area_id" jdbcType="BIGINT" property="areaId" />
+    <result column="street_id" jdbcType="BIGINT" property="streetId" />
+    <result column="community_id" jdbcType="BIGINT" property="communityId" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="unit_number" jdbcType="VARCHAR" property="unitNumber" />
+    <result column="floor" jdbcType="VARCHAR" property="floor" />
+    <result column="towards" jdbcType="VARCHAR" property="towards" />
+    <result column="flat_number" jdbcType="VARCHAR" property="flatNumber" />
+    <result column="furnish_level" jdbcType="VARCHAR" property="furnishLevel" />
+    <result column="room_year" jdbcType="INTEGER" property="roomYear" />
+    <result column="property_year" jdbcType="INTEGER" property="propertyYear" />
+    <result column="price" jdbcType="VARCHAR" property="price" />
+    <result column="tax_situation" jdbcType="VARCHAR" property="taxSituation" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="tel" jdbcType="INTEGER" property="tel" />
+    <result column="homeowner_name" jdbcType="VARCHAR" property="homeownerName" />
+    <result column="homeowner_tel" jdbcType="INTEGER" property="homeownerTel" />
+    <result column="create_user" jdbcType="BIGINT" property="createUser" />
+    <result column="update_user" jdbcType="BIGINT" property="updateUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, area_id, street_id, community_id, address, unit_number, `floor`, towards, flat_number, 
+    furnish_level, room_year, property_year, price, tax_situation, `state`, tel, homeowner_name, 
+    homeowner_tel, create_user, update_user, create_time, update_time, is_delete, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from house_t
+    where id = #{id,jdbcType=BIGINT} and is_delete = 0
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    update house_t
+    set is_delete = 1, updateName = #{updateName}
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.langxy.house.pojo.House" useGeneratedKeys="true">
+    insert into house_t
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="areaId != null">
+        area_id,
+      </if>
+      <if test="streetId != null">
+        street_id,
+      </if>
+      <if test="communityId != null">
+        community_id,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="unitNumber != null">
+        unit_number,
+      </if>
+      <if test="floor != null">
+        `floor`,
+      </if>
+      <if test="towards != null">
+        towards,
+      </if>
+      <if test="flatNumber != null">
+        flat_number,
+      </if>
+      <if test="furnishLevel != null">
+        furnish_level,
+      </if>
+      <if test="roomYear != null">
+        room_year,
+      </if>
+      <if test="propertyYear != null">
+        property_year,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="taxSituation != null">
+        tax_situation,
+      </if>
+      <if test="state != null">
+        `state`,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="homeownerName != null">
+        homeowner_name,
+      </if>
+      <if test="homeownerTel != null">
+        homeowner_tel,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      create_time,
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="areaId != null">
+        #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="streetId != null">
+        #{streetId,jdbcType=BIGINT},
+      </if>
+      <if test="communityId != null">
+        #{communityId,jdbcType=BIGINT},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="unitNumber != null">
+        #{unitNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null">
+        #{floor,jdbcType=VARCHAR},
+      </if>
+      <if test="towards != null">
+        #{towards,jdbcType=VARCHAR},
+      </if>
+      <if test="flatNumber != null">
+        #{flatNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="furnishLevel != null">
+        #{furnishLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="roomYear != null">
+        #{roomYear,jdbcType=INTEGER},
+      </if>
+      <if test="propertyYear != null">
+        #{propertyYear,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="taxSituation != null">
+        #{taxSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=INTEGER},
+      </if>
+      <if test="homeownerName != null">
+        #{homeownerName,jdbcType=VARCHAR},
+      </if>
+      <if test="homeownerTel != null">
+        #{homeownerTel,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      now(),
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.langxy.house.pojo.House">
+    update house_t
+    <set>
+      <if test="areaId != null">
+        area_id = #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="streetId != null">
+        street_id = #{streetId,jdbcType=BIGINT},
+      </if>
+      <if test="communityId != null">
+        community_id = #{communityId,jdbcType=BIGINT},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="unitNumber != null">
+        unit_number = #{unitNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null">
+        `floor` = #{floor,jdbcType=VARCHAR},
+      </if>
+      <if test="towards != null">
+        towards = #{towards,jdbcType=VARCHAR},
+      </if>
+      <if test="flatNumber != null">
+        flat_number = #{flatNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="furnishLevel != null">
+        furnish_level = #{furnishLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="roomYear != null">
+        room_year = #{roomYear,jdbcType=INTEGER},
+      </if>
+      <if test="propertyYear != null">
+        property_year = #{propertyYear,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="taxSituation != null">
+        tax_situation = #{taxSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        `state` = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=INTEGER},
+      </if>
+      <if test="homeownerName != null">
+        homeowner_name = #{homeownerName,jdbcType=VARCHAR},
+      </if>
+      <if test="homeownerTel != null">
+        homeowner_tel = #{homeownerTel,jdbcType=INTEGER},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=BIGINT},
+      </if>
+      update_time = now(),
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectAll" resultType="java.util.Map">
+    select a.id, a.address, a.unit_number unitNumber, a.`floor`, a.towards, a.flat_number flatNumber,
+           a.furnish_level furnishLevel, a.room_year roomyear, a.property_year propertyyear, a.price,
+           a.tax_situation taxSituation, a.`state`, a.tel, a.homeowner_name homeownerName,
+           a.homeowner_tel homeownerTel, a.create_user createUser, a.create_time createTime
+    from house_t a, area_t b, street_t c, community d
+    where a.area_id = b.id and a.street_id = c.id and a.community_id = d.id and a.is_delete = 0
+    order by create_time desc
+  </select>
+
+  <select id="selectById" resultType="java.util.Map">
+    select id, area_id areaId, street_id streetId, community_id communityId, address, unit_number unit_number,
+           `floor`, towards, flat_number, furnish_level furnishLevel, room_year rootYear, property_year propertyYear,
+           price, tax_situation taxSituation, `state`, tel, homeowner_name homeownerName, homeowner_tel homeownerTel,
+           remark
+    from house_t
+    where id = #{id} and id_delete = 0
+  </select>
+  <select id="selectNotHomeownerById" resultType="java.util.Map">
+    select id, area_id areaId, street_id streetId, community_id communityId, address, unit_number unit_number,
+           `floor`, towards, flat_number, furnish_level furnishLevel, room_year rootYear, property_year propertyYear,
+           price, tax_situation taxSituation, `state`, tel, remark
+    from house_t
+    where id = #{id} and id_delete = 0
+  </select>
+
+</mapper>
