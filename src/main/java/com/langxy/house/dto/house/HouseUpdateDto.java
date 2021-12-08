@@ -8,6 +8,11 @@ public class HouseUpdateDto {
     private Long id;
 
     /**
+     * 标题
+     */
+    private String title;
+
+    /**
      * 区域
      */
     private Long areaId;

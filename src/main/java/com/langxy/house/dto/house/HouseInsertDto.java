@@ -6,6 +6,11 @@ import lombok.Data;
 public class HouseInsertDto {
 
     /**
+     * 标题
+     */
+    private String title;
+
+    /**
      * 区域
      */
     private Long areaId;
