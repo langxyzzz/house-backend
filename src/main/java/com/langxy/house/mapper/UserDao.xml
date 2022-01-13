@@ -7,8 +7,8 @@
     <result column="login_pwd" jdbcType="VARCHAR" property="loginPwd" />
     <result column="real_name" jdbcType="VARCHAR" property="realName" />
     <result column="role" jdbcType="INTEGER" property="role" />
-    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
-    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="create_user" jdbcType="BIGINT" property="createUser" />
+    <result column="update_user" jdbcType="BIGINT" property="updateUser" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
@@ -63,7 +63,7 @@
         #{realName,jdbcType=VARCHAR},
       </if>
       <if test="role != null">
-        #{role,jdbcType=INTIGER},
+        #{role,jdbcType=INTEGER},
       </if>
       <if test="createUser != null">
         #{createUser,jdbcType=VARCHAR},
@@ -87,10 +87,10 @@
         real_name = #{realName,jdbcType=VARCHAR},
       </if>
       <if test="role != null">
-        `role` = #{role,jdbcType=INTIGER},
+        `role` = #{role,jdbcType=INTEGER},
       </if>
       <if test="updateUser != null">
-        update_user = #{updateUser,jdbcType=VARCHAR},
+        update_user = #{updateUser,jdbcType=BIGINT},
       </if>
         update_time = now(),
       <if test="isDelete != null">
@@ -108,6 +108,12 @@
     from user_t
     where is_delete = 0
     order by create_time desc
+  </select>
+
+  <select id="selectByLoginName" parameterType="string" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from user_t
+    where is_delete = 0 and login_name = #{loginName}
   </select>
 
 </mapper>

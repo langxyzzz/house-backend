@@ -83,7 +83,7 @@
   <select id="selectByStreetId" resultType="java.util.Map">
     select id, community_name communityName
     from community_t
-    where street_id = #{street} and is_delete = 0
+    where street_id = #{streetId} and is_delete = 0
     order by create_time desc
   </select>
 

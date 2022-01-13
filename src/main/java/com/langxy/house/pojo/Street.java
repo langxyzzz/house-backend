@@ -42,7 +42,7 @@ public class Street implements Serializable {
     /**
      * 删除标记
      */
-    private Integer idDelete;
+    private Integer isDelete;
 
     private static final long serialVersionUID = 1L;
 }

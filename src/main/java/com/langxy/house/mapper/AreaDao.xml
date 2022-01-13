@@ -74,4 +74,10 @@
     order by create_time desc
   </select>
 
+  <select id="selectByAreaName" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from area_t
+    where is_delete = 0 and area_name = #{areaName}
+  </select>
+
 </mapper>

@@ -3,7 +3,7 @@
 <mapper namespace="com.langxy.house.dao.HouseDao">
   <resultMap id="BaseResultMap" type="com.langxy.house.pojo.House">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="title" javaType="VARCHAR" property="title" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="area_id" jdbcType="BIGINT" property="areaId" />
     <result column="street_id" jdbcType="BIGINT" property="streetId" />
     <result column="community_id" jdbcType="BIGINT" property="communityId" />

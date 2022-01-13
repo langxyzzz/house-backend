@@ -18,6 +18,11 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 小区 service 接口实现
+ *
+ * @author langxy
+ */
 @Service
 public class CommunityServiceImpl implements ICommunityService {
 
@@ -69,7 +74,7 @@ public class CommunityServiceImpl implements ICommunityService {
         if (street == null) {
             throw new CustomerException(500, "this Id street is not found");
         }
-        return dao.selectByStreetId(street);
+        return dao.selectByStreetId(street.getId());
     }
 
     @Override

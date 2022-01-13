@@ -18,4 +18,6 @@ UserDao {
     int updateByPrimaryKey(User record);
 
     List<Map<String, Object>> selectAll();
+
+    User selectByLoginName(String loginName);
 }

@@ -24,6 +24,10 @@ public class AreaServiceImpl implements IAreaService {
 
     @Override
     public void insert(AreaInsertDto dto) {
+        Area areaItem = dao.selectByAreaName(dto.getAreaName());
+        if (areaItem != null) {
+            throw new CustomerException(500, "当前区域已存在");
+        }
         Area area = new Area();
         area.setAreaName(dto.getAreaName());
         area.setCreateUser(dto.getCreateUser());
@@ -35,6 +39,10 @@ public class AreaServiceImpl implements IAreaService {
 
     @Override
     public void modify(AreaModifyDto dto) {
+        Area areaItem = dao.selectByAreaName(dto.getAreaName());
+        if (areaItem != null) {
+            throw new CustomerException(500, "当前区域已存在");
+        }
         Area area = dao.selectByPrimaryKey(dto.getId());
         if (area == null) {
             throw new CustomerException(500, "this Id area is not found");

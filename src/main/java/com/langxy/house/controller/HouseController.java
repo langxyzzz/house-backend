@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping(value = "house")
 public class HouseController {
 
     @Resource

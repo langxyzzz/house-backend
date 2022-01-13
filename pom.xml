@@ -139,6 +139,13 @@
                     <include>application-${profileActive}.yml</include>
                 </includes>
             </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
         </resources>
 
         <plugins>

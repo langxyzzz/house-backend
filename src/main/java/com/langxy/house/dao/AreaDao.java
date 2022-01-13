@@ -17,4 +17,6 @@ public interface AreaDao {
     int updateByPrimaryKey(Area record);
 
     List<Map<String, Object>> selectAll();
+
+    Area selectByAreaName(String areaName);
 }

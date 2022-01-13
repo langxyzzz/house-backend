@@ -19,5 +19,5 @@ public interface CommunityDao {
 
     List<Map<String, Object>> selectAll();
 
-    List<Map<String, Object>> selectByStreetId(Street street);
+    List<Map<String, Object>> selectByStreetId(Long streetId);
 }

@@ -9,10 +9,10 @@
     <result column="update_user" jdbcType="BIGINT" property="updateUser" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="id_delete" jdbcType="INTEGER" property="idDelete" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, area_id, street_name, create_user, update_user, create_time, update_time, id_delete
+    id, area_id, street_name, create_user, update_user, create_time, update_time, is_delete
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -69,21 +69,21 @@
         update_user = #{updateUser,jdbcType=BIGINT},
       </if>
       update_time = now(),
-      <if test="idDelete != null">
-        id_delete = #{idDelete,jdbcType=INTEGER},
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
 
   <select id="selectAll" resultType="java.util.Map">
-    select id, street_name streetName
+    select id, area_id areaId, street_name streetName
     from street_t
     where is_delete = 0
     order by create_time desc
   </select>
   <select id="selectByAreaId" resultType="java.util.Map">
-    select id, street_name streetName
+    select id, area_id areaId, street_name streetName
     from street_t
     where area_id = #{areaId} and is_delete = 0
     order by create_time desc
