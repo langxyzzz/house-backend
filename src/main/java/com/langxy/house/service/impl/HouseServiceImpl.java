@@ -49,12 +49,14 @@ public class HouseServiceImpl implements IHouseService {
         }
         List<Long> resIdList = Stream.of(dto.getResIds().split(",")).map(Long::valueOf).collect(Collectors.toList());
         List<Res> resList = new ArrayList<>();
+        Date date = new Date();
         resIdList.forEach(item -> {
             Res res = new Res();
             res.setId(item);
             res.setHouseId(house.getId());
             res.setIsDelete(0);
             res.setUpdateUser(dto.getCreateUser());
+            res.setUpdateTime(date);
             resList.add(res);
         });
         rowCount = resService.updateHouseId(resList);
@@ -76,19 +78,24 @@ public class HouseServiceImpl implements IHouseService {
         List<Long> newIdList = Stream.of(dto.getResIds().split(",")).map(Long::valueOf).collect(Collectors.toList());
         List<Long> resIdList = resService.getIdByHouseId(dto.getId());
         List<Long> delIdList = resIdList.stream().filter(item -> !newIdList.contains(item)).collect(Collectors.toList());
+        Date date = new Date();
         newIdList.forEach(item -> {
             Res res = new Res();
             res.setId(item);
             res.setHouseId(dto.getId());
             res.setIsDelete(0);
             res.setUpdateUser(dto.getUpdateUser());
+            res.setUpdateTime(date);
             resList.add(res);
         });
         delIdList.forEach(item -> {
             Res res = new Res();
             res.setId(item);
+            res.setHouseId(dto.getId());
             res.setIsDelete(1);
             res.setUpdateUser(dto.getUpdateUser());
+            res.setUpdateTime(date);
+            resList.add(res);
         });
         if (resList.size() > 0) {
             rowCount = resService.updateHouseId(resList);

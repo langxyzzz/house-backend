@@ -12,3 +12,14 @@ spring:
       default-auto-commit: true
       min-evictable-idle-time-millis: 3600000
       test-while-idle: true
+
+
+  servlet:
+    multipart:
+      max-file-size: 10000000
+      max-request-size: 10000000
+
+logging:
+  level:
+    com.langxy.house.dao: debug
+    

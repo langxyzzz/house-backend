@@ -34,6 +34,10 @@ public class StreetServiceImpl implements IStreetService {
             throw new CustomerException(500, "this Id area is not found");
         }
         Street street = new Street();
+        Street dbStreet = dao.getInfoByAreaIdAndStreetName(dto.getAreaId(), dto.getStreetName());
+        if (dbStreet != null) {
+            throw new CustomerException(500, "当前社区已存在");
+        }
         street.setAreaId(dto.getAreaId());
         street.setStreetName(dto.getStreetName());
         street.setCreateUser(dto.getCreateUser());
@@ -52,6 +56,10 @@ public class StreetServiceImpl implements IStreetService {
         Street street = dao.selectByPrimaryKey(dto.getId());
         if (street == null) {
             throw new CustomerException(500, "this Id street is not found");
+        }
+        Street dbStreet = dao.getInfoByAreaIdAndStreetName(dto.getAreaId(), dto.getStreetName());
+        if (dbStreet != null) {
+            throw new CustomerException(500, "当前社区已存在");
         }
         street.setAreaId(dto.getAreaId());
         street.setStreetName(dto.getStreetName());

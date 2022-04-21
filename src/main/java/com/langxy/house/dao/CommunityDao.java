@@ -1,7 +1,6 @@
 package com.langxy.house.dao;
 
 import com.langxy.house.pojo.Community;
-import com.langxy.house.pojo.Street;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -20,4 +19,7 @@ public interface CommunityDao {
     List<Map<String, Object>> selectAll();
 
     List<Map<String, Object>> selectByStreetId(Long streetId);
+
+    Community getInfoByStreetIdAndCommunityName(@Param("streetId") Long streetId, @Param("communityName") String communityName);
+
 }

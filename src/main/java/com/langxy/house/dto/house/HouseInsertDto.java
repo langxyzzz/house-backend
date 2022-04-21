@@ -83,7 +83,7 @@ public class HouseInsertDto {
     /**
      * 联系电话
      */
-    private Integer tel;
+    private String tel;
 
     /**
      * 房主
@@ -93,7 +93,7 @@ public class HouseInsertDto {
     /**
      * 房主电话
      */
-    private Integer homeownerTel;
+    private String homeownerTel;
 
     /**
      * 创建人

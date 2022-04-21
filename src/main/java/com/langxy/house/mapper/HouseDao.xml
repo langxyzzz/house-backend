@@ -18,9 +18,9 @@
     <result column="price" jdbcType="VARCHAR" property="price" />
     <result column="tax_situation" jdbcType="VARCHAR" property="taxSituation" />
     <result column="state" jdbcType="INTEGER" property="state" />
-    <result column="tel" jdbcType="INTEGER" property="tel" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
     <result column="homeowner_name" jdbcType="VARCHAR" property="homeownerName" />
-    <result column="homeowner_tel" jdbcType="INTEGER" property="homeownerTel" />
+    <result column="homeowner_tel" jdbcType="VARCHAR" property="homeownerTel" />
     <result column="create_user" jdbcType="BIGINT" property="createUser" />
     <result column="update_user" jdbcType="BIGINT" property="updateUser" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -157,13 +157,13 @@
         #{state,jdbcType=INTEGER},
       </if>
       <if test="tel != null">
-        #{tel,jdbcType=INTEGER},
+        #{tel,jdbcType=VARCHAR},
       </if>
       <if test="homeownerName != null">
         #{homeownerName,jdbcType=VARCHAR},
       </if>
       <if test="homeownerTel != null">
-        #{homeownerTel,jdbcType=INTEGER},
+        #{homeownerTel,jdbcType=VARCHAR},
       </if>
       <if test="createUser != null">
         #{createUser,jdbcType=BIGINT},
@@ -224,13 +224,13 @@
         `state` = #{state,jdbcType=INTEGER},
       </if>
       <if test="tel != null">
-        tel = #{tel,jdbcType=INTEGER},
+        tel = #{tel,jdbcType=VARCHAR},
       </if>
       <if test="homeownerName != null">
         homeowner_name = #{homeownerName,jdbcType=VARCHAR},
       </if>
       <if test="homeownerTel != null">
-        homeowner_tel = #{homeownerTel,jdbcType=INTEGER},
+        homeowner_tel = #{homeownerTel,jdbcType=VARCHAR},
       </if>
       <if test="updateUser != null">
         update_user = #{updateUser,jdbcType=BIGINT},
@@ -251,25 +251,25 @@
            a.furnish_level furnishLevel, a.room_year roomyear, a.property_year propertyyear, a.price,
            a.tax_situation taxSituation, a.`state`, a.tel, a.homeowner_name homeownerName,
            a.homeowner_tel homeownerTel, a.create_user createUser, a.create_time createTime
-    from house_t a, area_t b, street_t c, community d
+    from house_t a, area_t b, street_t c, community_t d
     where a.area_id = b.id and a.street_id = c.id and a.community_id = d.id and a.is_delete = 0
-    order by create_time desc
+    order by a.create_time desc
   </select>
 
   <select id="selectById" resultType="java.util.Map">
-    select id, a.title, area_id areaId, street_id streetId, community_id communityId, address, unit_number unit_number,
+    select id, title, area_id areaId, street_id streetId, community_id communityId, address, unit_number unit_number,
            `floor`, towards, flat_number, furnish_level furnishLevel, room_year rootYear, property_year propertyYear,
            price, tax_situation taxSituation, `state`, tel, homeowner_name homeownerName, homeowner_tel homeownerTel,
            remark
     from house_t
-    where id = #{id} and id_delete = 0
+    where id = #{id} and is_delete = 0
   </select>
   <select id="selectNotHomeownerById" resultType="java.util.Map">
-    select id, a.title, area_id areaId, street_id streetId, community_id communityId, address, unit_number unit_number,
+    select id, title, area_id areaId, street_id streetId, community_id communityId, address, unit_number unit_number,
            `floor`, towards, flat_number, furnish_level furnishLevel, room_year rootYear, property_year propertyYear,
            price, tax_situation taxSituation, `state`, tel, remark
     from house_t
-    where id = #{id} and id_delete = 0
+    where id = #{id} and is_delete = 0
   </select>
 
 </mapper>

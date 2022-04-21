@@ -35,6 +35,10 @@ public class CommunityServiceImpl implements ICommunityService {
     @Override
     public void insert(CommunityInsertDto dto) {
         Community community = new Community();
+        Community dbCommunity = dao.getInfoByStreetIdAndCommunityName(dto.getStreetId(), dto.getCommunityName());
+        if (dbCommunity != null) {
+            throw new CustomerException(500, "当前小区已存在");
+        }
         community.setStreetId(dto.getStreetId());
         community.setCommunityName(dto.getCommunityName());
         community.setCreateUser(dto.getCreateUser());
@@ -53,6 +57,10 @@ public class CommunityServiceImpl implements ICommunityService {
         Community community = dao.selectByPrimaryKey(dto.getId());
         if (community == null) {
             throw new CustomerException(500, "this Id community is not found");
+        }
+        Community dbCommunity = dao.getInfoByStreetIdAndCommunityName(dto.getStreetId(), dto.getCommunityName());
+        if (dbCommunity != null) {
+            throw new CustomerException(500, "当前小区已存在");
         }
         community.setStreetId(dto.getStreetId());
         community.setCommunityName(dto.getCommunityName());

@@ -27,6 +27,7 @@ public class ResServiceImpl implements IResService {
         if (multipartFileList.size() == 0) {
             throw new CustomerException(500, "file can not null");
         }
+        // /private/var/folders/wc/9_gc14lx75ng2q2xt71nzkxr0000gn/T/tomcat.8080.2137674439907995917/work/Tomcat/localhost/house/
         List<Map<String, Object>> data = new ArrayList<>();
         List<Res> resList = new ArrayList<>();
         multipartFileList.forEach(item -> {

@@ -88,7 +88,7 @@
   <insert id="inserts"  keyColumn="id" keyProperty="id" useGeneratedKeys="true">
     insert into res_t(remote_path, filename, create_user, create_time) values
     <foreach collection="list" item="item" separator=",">
-      (#{item.remotePath}, #{item.filename}, #{item.createUser}, #{item.createTime})
+      (#{item.remotePath}, #{item.filename}, #{item.createUser}, now())
     </foreach>
   </insert>
 
@@ -100,16 +100,24 @@
             when id = #{item.id} then #{item.houseId}
         </foreach>
       </trim>
-    </trim>
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="create_user = case" suffix="end,">
+      <trim prefix="update_user = case" suffix="end,">
         <foreach collection="list" item="item">
-          when id = #{item.id} then #{item.createUser}
+          when id = #{item.id} then #{item.updateUser}
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" item="item">
+          when id = #{item.id} then #{item.updateTime}
+        </foreach>
+      </trim>
+      <trim prefix="is_delete = case" suffix="end,">
+        <foreach collection="list" item="item">
+          when id = #{item.id} then #{item.isDelete}
         </foreach>
       </trim>
     </trim>
     where id in
-    <foreach collection="list" item="item" open="(" separator="," close=",">
+    <foreach collection="list" item="item" open="(" separator="," close=")">
       #{item.id}
     </foreach> and is_delete = 0
   </update>

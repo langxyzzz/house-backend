@@ -86,5 +86,10 @@
     where street_id = #{streetId} and is_delete = 0
     order by create_time desc
   </select>
+  <select id="getInfoByStreetIdAndCommunityName" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from community_t
+    where street_id = #{streetId} and community_name = #{communityName} and is_delete = 0
+  </select>
 
 </mapper>

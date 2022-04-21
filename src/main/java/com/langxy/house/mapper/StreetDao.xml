@@ -88,5 +88,10 @@
     where area_id = #{areaId} and is_delete = 0
     order by create_time desc
   </select>
+    <select id="getInfoByAreaIdAndStreetName" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List"/>
+      from street_t
+      where area_id = #{areaId} and street_name = #{streetName} and is_delete = 0
+    </select>
 
 </mapper>

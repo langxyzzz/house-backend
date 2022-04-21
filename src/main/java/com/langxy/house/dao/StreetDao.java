@@ -19,4 +19,6 @@ public interface StreetDao {
     List<Map<String, Object>> selectAll();
 
     List<Map<String, Object>> selectByAreaId(Long areaId);
+
+    Street getInfoByAreaIdAndStreetName(@Param("areaId") Long areaId, @Param("streetName") String streetName);
 }

@@ -90,7 +90,7 @@ public class House implements Serializable {
     /**
      * 联系电话
      */
-    private Integer tel;
+    private String tel;
 
     /**
      * 房主
@@ -100,7 +100,7 @@ public class House implements Serializable {
     /**
      * 房主电话
      */
-    private Integer homeownerTel;
+    private String homeownerTel;
 
     /**
      * 创建人
